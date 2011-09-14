@@ -117,7 +117,7 @@ class WpLinkLove {
 
 		 # Linklove redirect
 		add_action('template_redirect', array($this, 'template_redirect'));
-
+    wp_enqueue_script('jquery');
   }
 
   function admin_init() {
@@ -581,6 +581,8 @@ class WpLinkLove {
 
 	function template_redirect() {
 		if ($_SERVER['REQUEST_URI'] == '/linklove.js') {
+      status_header(200);
+      header('Content-Type: text/javascript');
 			require('script.php');
 			exit;
 		}
@@ -589,13 +591,15 @@ class WpLinkLove {
   function linklove_shortcode() {
     ?>
       <h1>Copy and Paste the code below into your page or widget.</h1>
-      <textarea>
-        <a id=”website_linklove” href=”http://dev.johnmangino.com” title=””>Visit John Mangino at dev.johnmangino.com</a>
-        <script src=”http://dev.johnmangino.com/linklove.js”></script>
-        <script>
-        LinkLove.init();
-        </script>
-      </textarea>
+<textarea>&lt;a id=&quot;website_linklove” href=&quot;http://dev.johnmangino.com&quot; title=&quot;&quot;&gt;Visit John Mangino at dev.johnmangino.com&lt;/a&gt;
+&lt;script src=&quot;http://dev.johnmangino.com/linklove.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+LinkLove.init({
+  
+});
+&lt;/script&gt;</textarea>
+      <script></script>
+
   <?php
   }
   
